@@ -2,6 +2,13 @@
 
 This repository contains the code and documentation for reconstructing strain-specific Genome-Scale Metabolic Models (GEMs) of the Lactobacillaceae family. The workflow is designed to automate the generation of GEMs, identify and fill gaps in the models, and perform various analyses to understand the metabolic capabilities and differences among strains.
 
+
+<p align="center">
+  <img src="docs/assets/method_overview.png" width="900" alt="Automated pipeline: genomes → QA/QC → annotation (BAKTA) → pangenome (CD-HIT) → GEM reconstruction (CarveMe) → panGPRs → neighborhood analysis; with protein stoichiometry, 3D modeling, and structural analysis integration.">
+</p>
+
+*Figure.* High-level workflow for automated pangenome and metabolic modeling.
+
 ## Workflow Overview
 
 ### 1. GEM Generation (`GEMgenerator.py`)
