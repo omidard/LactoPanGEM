@@ -27,7 +27,7 @@ This repository provides code and documentation to reconstruct **strain-specific
 
 
 <p align="center">
-  <img src="docs/msystems.00156-24.f001.jpg" width="900" alt="Automated pipeline: genomes → QA/QC → annotation (BAKTA) → pangenome (CD-HIT) → GEM reconstruction (CarveMe) → panGPRs → neighborhood analysis; with protein stoichiometry, 3D modeling, and structural analysis integration.">
+  <img src="docs/msystems.00156-24.f001.jpg" width="450" alt="Automated pipeline: genomes → QA/QC → annotation (BAKTA) → pangenome (CD-HIT) → GEM reconstruction (CarveMe) → panGPRs → neighborhood analysis; with protein stoichiometry, 3D modeling, and structural analysis integration.">
 </p>
 
 <p align="center"><em>Figure 1. High-level workflow for automated pangenome and metabolic modeling.</em></p>
