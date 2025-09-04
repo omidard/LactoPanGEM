@@ -4,7 +4,7 @@ This repository contains the code and documentation for reconstructing strain-sp
 
 
 <p align="center">
-  <img src="docs/assets/method_overview.png" width="900" alt="Automated pipeline: genomes → QA/QC → annotation (BAKTA) → pangenome (CD-HIT) → GEM reconstruction (CarveMe) → panGPRs → neighborhood analysis; with protein stoichiometry, 3D modeling, and structural analysis integration.">
+  <img src="docs/msystems.00156-24.f001.jpg" width="900" alt="Automated pipeline: genomes → QA/QC → annotation (BAKTA) → pangenome (CD-HIT) → GEM reconstruction (CarveMe) → panGPRs → neighborhood analysis; with protein stoichiometry, 3D modeling, and structural analysis integration.">
 </p>
 
 *Figure.* High-level workflow for automated pangenome and metabolic modeling.
