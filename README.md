@@ -25,6 +25,14 @@ Automated reconstruction of strain-specific Genome-Scale Metabolic Models (GEMs)
 ## Overview
 This repository provides code and documentation to reconstruct **strain-specific GEMs** for Lactobacillaceae. The workflow is optimized for high-performance environments (e.g., 96 cores on Azure) but can be adapted to smaller or larger machines.
 
+
+<p align="center">
+  <img src="docs/msystems.00156-24.f001.jpg" width="900" alt="Automated pipeline: genomes → QA/QC → annotation (BAKTA) → pangenome (CD-HIT) → GEM reconstruction (CarveMe) → panGPRs → neighborhood analysis; with protein stoichiometry, 3D modeling, and structural analysis integration.">
+</p>
+
+<p align="center"><em>Figure 1. High-level workflow for automated pangenome and metabolic modeling.</em></p>
+
+
 ---
 
 ## Workflow
