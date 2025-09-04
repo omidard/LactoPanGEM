@@ -1,38 +1,53 @@
 # Pangenome-Scale Reconstruction of Lactobacillaceae Metabolism
+Automated reconstruction of strain-specific Genome-Scale Metabolic Models (GEMs) across the Lactobacillaceae family, with gap filling and downstream comparative analyses.
 
-This repository contains the code and documentation for reconstructing strain-specific Genome-Scale Metabolic Models (GEMs) of the Lactobacillaceae family. The workflow is designed to automate the generation of GEMs, identify and fill gaps in the models, and perform various analyses to understand the metabolic capabilities and differences among strains.
+> End-to-end workflow: curated inputs → GEM generation → gap filling → QC/curation → flux/essentiality analyses → niche enrichment and panGEM FVA reports.
 
+---
 
-<p align="center">
-  <img src="docs/msystems.00156-24.f001.jpg" width="900" alt="Automated pipeline: genomes → QA/QC → annotation (BAKTA) → pangenome (CD-HIT) → GEM reconstruction (CarveMe) → panGPRs → neighborhood analysis; with protein stoichiometry, 3D modeling, and structural analysis integration.">
-</p>
+## Table of Contents
+- [Overview](#overview)
+- [Workflow](#workflow)
+  - [1) GEM Generation (`GEMgenerator.py`)](#1-gem-generation-gemgeneratorpy)
+  - [2) Gap Filling (`dgap.py`, `run_dgap.py`)](#2-gap-filling-dgappy-rundgappy)
+  - [3) Manual Curation](#3-manual-curation)
+  - [4) Reporting & Analysis Tools](#4-reporting--analysis-tools)
+- [Figure](#figure)
+- [Directory Layout](#directory-layout)
+- [Dependencies](#dependencies)
+- [Quick Start](#quick-start)
+- [Reproducibility](#reproducibility)
+- [Citation](#citation)
+- [License](#license)
 
-*Figure.* High-level workflow for automated pangenome and metabolic modeling.
+---
 
-## Workflow Overview
+## Overview
+This repository provides code and documentation to reconstruct **strain-specific GEMs** for Lactobacillaceae. The workflow is optimized for high-performance environments (e.g., 96 cores on Azure) but can be adapted to smaller or larger machines.
 
-### 1. GEM Generation (`GEMgenerator.py`)
-The main workflow for generating strain-specific GEMs. It requires four types of input:
-- A Reactome model in JSON format.
-- A nucleotide FASTA file containing sequences of genes to be incorporated into Reactome Gene-Protein-Reaction associations (GPRs).
-- An amino acid FASTA file containing sequences of genes for Reactome GPRs.
-- GenBank files (.gbk) of target strains.
+---
 
-The script is optimized for high-performance computing, utilizing multiprocessing over 96 cores on an Azure virtual machine. Adjustments may be necessary to optimize performance on machines with different core counts. The output is draft strain-specific GEMs.
+## Workflow
 
-### 2. Gap Filling (`dgap.py` and `run_dgap.py`)
-- `dgap.py` contains functions for gap filling.
-- `run_dgap.py` leverages these functions to identify and fill gaps in the GEMs, using a Reactome model and the draft GEMs as inputs. This produces gap-filled GEMs.
+### 1) GEM Generation (`GEMgenerator.py`)
+Generates draft strain-specific GEMs.
 
-### 3. Manual Curation
-Draft GEMs undergo manual curation to ensure accuracy and completeness. Details of the curation process are discussed in our accompanying paper.
+**Inputs**
+- Reactome model (JSON)
+- Gene sequences for Reactome GPRs:
+  - Nucleotide FASTA (`.fna`)
+  - Amino acid FASTA (`.faa`)
+- GenBank files (`.gbk`) for target strains
 
-### 4. Computation Requirements
-Due to the computational demands of large-scale analysis, the code is optimized for high-performance environments. It may require modifications to adapt to the computational power available for smaller or larger projects.
+**Output**
+- Draft strain-specific GEMs (one model per strain)
 
-### 5. Reporting and Analysis Tools
-- `species_all_gaps.py`: Generates a report on gap-filled reactions. Requires a directory of GEMs and a dataframe listing GEM IDs and their species labels.
-- `species_knockout_fluxes.py`: Calculates flux distributions for all reactions across GEMs, producing a .csv report. Useful for identifying essential compounds and reactions.
-- `basic_inf.py`: Generates a .csv file with basic GEM information, such as the number of reactions, gaps, growth rates, and gene counts.
-- `lacto_pangem_fva.py`: Performs Flux Variability Analysis (FVA) on panGEMs, outputting a dataframe with minimum and maximum fluxes for all reactions/strains.
-- `niche_reactions.py`: Identifies reactions enriched in each niche, using two .csv files: one containing GEM IDs with species names and isolation sources, and another listing reaction presence (1) or absence (0) across all GEMs.
+**Example**
+```bash
+python GEMgenerator.py \
+  --reactome data/reactome_model.json \
+  --genes-fna data/sequences/genes.fna \
+  --genes-faa data/sequences/genes.faa \
+  --genbank  data/genomes/ \
+  --out      results/gems_draft \
+  --threads  96
